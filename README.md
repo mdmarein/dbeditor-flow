@@ -18,11 +18,28 @@ Levanta el servidor en `http://localhost:3100` (configurable con `PORT`) y abre 
 npm run dev
 ```
 
+Alternativas equivalentes a `npm start`, sin necesitar terminal después de la primera vez:
+
+- **Mac / Linux**: `./start.sh`
+- **Windows**: doble clic en `start.bat`
+
+### Acceso directo de escritorio (opcional)
+
+- **macOS**: `bash tools/make-mac-app.sh` crea `DBEditor Flow.app` en el Desktop (bundle real, con ícono y firma ad-hoc). Doble clic arranca el servidor en segundo plano y abre el navegador; si ya está corriendo, solo abre el navegador.
+- **Windows**: doble clic en `tools/make-win-shortcut.bat` crea un acceso directo "DBEditor Flow" en el Desktop que usa `tools/launch-windows.vbs` para arrancar el servidor sin ventana de consola.
+- **Linux**: no hay generador de acceso directo dedicado; usar `./start.sh` desde una terminal.
+
 ## Estructura
 
 ```
 dbeditor-flow/
 ├── server.js                    # Servidor HTTP (sin deps), rutas API, estáticos
+├── start.sh / start.bat         # Arranque manual (Mac/Linux · Windows)
+├── tools/
+│   ├── make-mac-app.sh          # Genera DBEditor Flow.app para el Desktop (macOS)
+│   ├── make-win-shortcut.bat    # Genera acceso directo para el Desktop (Windows)
+│   ├── launch-windows.vbs       # Lanzador silencioso usado por el acceso directo de Windows
+│   └── icons/                   # AppIcon.icns · dbeditor-flow.ico · dbeditor-flow_icon.png
 ├── data/
 │   └── prep-formats.json        # Presets de formato número/fecha guardados por el usuario
 └── public/
