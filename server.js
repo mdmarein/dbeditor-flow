@@ -177,12 +177,14 @@ server.listen(PORT, '127.0.0.1', () => {
   console.log(`  Servidor: ${addr}`);
   console.log(`  Datos:    ${DATA_DIR}`);
   console.log(`\n  Abrí ${addr} en Chrome\n`);
-  // Intentar abrir el browser automáticamente
-  const { exec } = require('child_process');
-  const cmd = process.platform === 'darwin' ? `open ${addr}`
-            : process.platform === 'win32'  ? `start ${addr}`
-            : `xdg-open ${addr}`;
-  exec(cmd, err => { if (err) console.log(`  (Abrí ${addr} manualmente)\n`); });
+  // Abrir el browser solo cuando se lanza directamente (no desde el .app, que lo maneja el launcher)
+  if (!process.env.LAUNCHED_BY_APP) {
+    const { exec } = require('child_process');
+    const cmd = process.platform === 'darwin' ? `open ${addr}`
+              : process.platform === 'win32'  ? `start ${addr}`
+              : `xdg-open ${addr}`;
+    exec(cmd, err => { if (err) console.log(`  (Abrí ${addr} manualmente)\n`); });
+  }
 });
 
 server.on('error', e => {

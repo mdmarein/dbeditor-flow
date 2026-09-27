@@ -62,20 +62,26 @@ if [ -z "\$NODE" ]; then
   exit 1
 fi
 
-# Si el servidor ya está corriendo, solo abrir el browser y salir
+# Detectar si el servidor ya estaba corriendo antes de (re)iniciarlo
+ALREADY_RUNNING=false
 if lsof -i :\$PORT -t &>/dev/null 2>&1; then
-  open "\$URL"
-  exit 0
+  ALREADY_RUNNING=true
+  kill \$(lsof -i :\$PORT -t) 2>/dev/null
+  sleep 0.5
 fi
 
-# Arrancar el servidor en background (server.js abre el browser solo al levantar)
+# Arrancar (o reiniciar) el servidor en background
 cd "\$PROJECT_DIR"
-nohup "\$NODE" server.js >> "\$PROJECT_DIR/server.log" 2>&1 &
+nohup env LAUNCHED_BY_APP=1 "\$NODE" server.js >> "\$PROJECT_DIR/server.log" 2>&1 &
 
-# Esperar a que el servidor levante (max 8 segundos) — sin abrir browser aquí
+# Esperar a que el servidor levante (max 8 segundos)
 for i in {1..16}; do
   sleep 0.5
   if lsof -i :\$PORT -t &>/dev/null 2>&1; then
+    # Solo abrir browser si no había servidor antes; si ya estaba, el tab se reconecta solo
+    if [ "\$ALREADY_RUNNING" = false ]; then
+      open "\$URL"
+    fi
     exit 0
   fi
 done
