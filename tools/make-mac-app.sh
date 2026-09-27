@@ -62,22 +62,20 @@ if [ -z "\$NODE" ]; then
   exit 1
 fi
 
-# Si ya hay algo en el puerto, solo abrir el browser
+# Si el servidor ya está corriendo, solo abrir el browser y salir
 if lsof -i :\$PORT -t &>/dev/null 2>&1; then
   open "\$URL"
   exit 0
 fi
 
-# Arrancar el servidor en background
+# Arrancar el servidor en background (server.js abre el browser solo al levantar)
 cd "\$PROJECT_DIR"
 nohup "\$NODE" server.js >> "\$PROJECT_DIR/server.log" 2>&1 &
-SERVER_PID=\$!
 
-# Esperar a que el servidor esté listo (max 8 segundos)
+# Esperar a que el servidor levante (max 8 segundos) — sin abrir browser aquí
 for i in {1..16}; do
   sleep 0.5
   if lsof -i :\$PORT -t &>/dev/null 2>&1; then
-    open "\$URL"
     exit 0
   fi
 done
