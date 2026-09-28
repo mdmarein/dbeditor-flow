@@ -19,7 +19,8 @@ const DICT = {
     'header.llm':           'Gestionar proveedores LLM',
     'header.csv_editor':    'Editor de CSV',
     'header.learning':      'Gestionar aprendizaje',
-    'header.tagline':       'Cleaning | Transformation | Governance',
+    'header.tagline':       'Editor de CSV y XLSX',
+    'footer.tagline':       'Editor de CSV y XLSX',
 
     // ── Tarjetas de configuración ─────────────────────────────
     'card.import':          'A — Importar Archivo',
@@ -804,7 +805,8 @@ const DICT = {
     'header.llm':           'Manage LLM providers',
     'header.csv_editor':    'CSV Editor',
     'header.learning':      'Manage learning',
-    'header.tagline':       'Cleaning | Transformation | Governance',
+    'header.tagline':       'CSV & XLSX Editor',
+    'footer.tagline':       'CSV & XLSX Editor',
 
     // ── Setup cards ───────────────────────────────────────────
     'card.import':          'A — Import File',

@@ -59,8 +59,40 @@ const TOOLS = [
 
 // ── Bootstrap ─────────────────────────────────────────────────
 
+function _initTheme() {
+  const isDark = localStorage.getItem('datab-theme') !== 'light';
+  document.body.classList.toggle('light', !isDark);
+  const sun = document.getElementById('theme-icon-sun');
+  const moon = document.getElementById('theme-icon-moon');
+  if (sun) sun.style.display = isDark ? 'none' : 'inline';
+  if (moon) moon.style.display = isDark ? 'inline' : 'none';
+  const btn = document.getElementById('btn-theme');
+  if (btn) btn.title = isDark ? t('header.theme_dark') : t('header.theme_light');
+  btn?.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light');
+    localStorage.setItem('datab-theme', isLight ? 'light' : 'dark');
+    if (sun) sun.style.display = isLight ? 'inline' : 'none';
+    if (moon) moon.style.display = isLight ? 'none' : 'inline';
+    if (btn) btn.title = isLight ? t('header.theme_light') : t('header.theme_dark');
+  });
+}
+
+function _initLang() {
+  const lang = window.__DATAB_LANG || 'es';
+  const btn = document.getElementById('btn-lang');
+  if (!btn) return;
+  btn.textContent = lang === 'es' ? 'EN' : 'ES';
+  btn.title = lang === 'es' ? t('header.lang_title') : 'Cambiar a Español';
+  btn.addEventListener('click', () => {
+    const newLang = window.__DATAB_LANG === 'es' ? 'en' : 'es';
+    localStorage.setItem('datab-lang', newLang);
+    location.reload();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.toggle('light', localStorage.getItem('datab-theme') === 'light');
+  _initTheme();
+  _initLang();
   applyI18n();
   _wireStatic();
   _wireDropZone();

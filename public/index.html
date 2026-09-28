@@ -9,33 +9,54 @@
     document.getElementById('editor-html-root').lang = window.__DATAB_LANG;
   </script>
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" sizes="512x512" href="/img/favicon-512.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16.png">
   <link rel="apple-touch-icon" sizes="192x192" href="/img/favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
   <style>
     html,body{margin:0;padding:0;height:100%;overflow:hidden}
     body{display:flex;flex-direction:column}
     .modal-editor{position:relative;inset:auto;background:none;padding:0;display:flex;flex:1;overflow:hidden}
     .editor-box{border-radius:0;border-left:none;border-right:none;border-top:none}
-    #editor-dropscreen{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:24px}
-    #editor-dropscreen .dz{width:100%;max-width:480px}
-    #editor-dropscreen .brand{font-size:20px;font-weight:600;margin-bottom:22px;color:var(--t0);display:flex;align-items:center;gap:10px}
-    #editor-dropscreen .brand img{width:28px;height:28px;object-fit:contain}
-    #editor-dropscreen .brand span{color:var(--accent)}
+    #editor-dropscreen{display:block;overflow-y:auto;flex:1;padding:20px 0 0;position:relative}
   </style>
 </head>
 <body>
 
+<header style="flex-shrink:0;border-bottom:1px solid var(--border);background:var(--bg)">
+  <div class="hdr" style="max-width:1200px;margin:0 auto;padding:12px 22px">
+    <div class="logo"><img src="/img/logo.webp" alt="DBEditor Flow" width="34" height="34"></div>
+    <div class="hdr-t">
+      <h1>DBEditor <em>Flow</em></h1>
+      <p><i data-i18n="header.tagline">Editor de CSV y XLSX</i></p>
+    </div>
+    <div class="hdr-actions" style="flex-direction:row;gap:6px">
+      <button class="btn-hdr-icon btn-hdr-lang" id="btn-lang" title="Switch to English" aria-label="Switch to English">EN</button>
+      <button class="btn-hdr-icon" id="btn-theme" title="Cambiar tema" aria-label="Cambiar tema">
+        <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" style="display:none"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+        <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
 <!-- ══ PANTALLA DE IMPORTACIÓN ══ -->
 <div id="editor-dropscreen">
-  <div class="brand"><img src="/img/dbeditor-flow_logo.png" alt="">DBEditor <span>Flow</span></div>
-  <div class="dz" id="dz">
-    <div class="dz-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg></div>
-    <div class="dz-t" data-i18n="import.drag">Arrastrá el archivo aquí</div>
-    <div class="dz-s"><span data-i18n="import.click_pre">o </span><strong data-i18n="import.click">hacé clic para seleccionar</strong></div>
+  <div style="max-width:1200px;min-width:0;margin:0 auto;padding:0 22px">
+    <div class="card">
+      <div class="card-title"><span data-i18n="card.import">A — Importar Archivo</span></div>
+      <div class="dz" id="dz">
+        <div class="dz-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg></div>
+        <div class="dz-t" data-i18n="import.drag">Arrastrá el archivo aquí</div>
+        <div class="dz-s"><span data-i18n="import.click_pre">o </span><strong data-i18n="import.click">hacé clic para seleccionar</strong></div>
+      </div>
+      <input type="file" id="fi" accept=".csv,.CSV,.tsv,.TSV,.xlsx,.XLSX" style="display:none">
+    </div>
+    <div class="footer"><strong>DBEditor <em>Flow</em></strong><span style="color:#a0a0a0"> · </span><i data-i18n="footer.tagline">Editor de CSV y XLSX</i><span style="color:#a0a0a0"> · </span><span class="footer-year">© 2026</span> <span style="color:var(--accent)">mdmarein</span><span style="color:#a0a0a0"> · </span><a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener" style="color:#a0a0a0;text-decoration:none">GNU AGPLv3</a></div>
   </div>
-  <input type="file" id="fi" accept=".csv,.CSV,.tsv,.TSV,.xlsx,.XLSX" style="display:none">
 </div>
 
 <!-- ══ EDITOR ══ -->

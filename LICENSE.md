@@ -1,6 +1,6 @@
-DataB Flow · Cleaning | Transformation | Governance
+DBEditor Flow · Editor de CSV y XLSX
 Copyright (C) 2026 mdmarein
-https://github.com/mdmarein/datab-flow
+https://github.com/mdmarein/dbeditor-flow
 
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
