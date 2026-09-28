@@ -1,4 +1,6 @@
-<!-- Banner: public/img/dbeditor-flow-banner.png (pendiente) -->
+<div align="center">
+  <img src="public/img/dbeditor-flow-banner.png" alt="DBEditor Flow" width="100%">
+</div>
 
 # DBEditor Flow
 
