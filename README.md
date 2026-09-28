@@ -8,6 +8,8 @@
 
 ![version](https://img.shields.io/badge/version-1.0.0-blue) ![license](https://img.shields.io/badge/license-AGPL--3.0-green) ![node](https://img.shields.io/badge/node-%3E%3D14-brightgreen)
 
+**English version:** [README.en.md](README.en.md)
+
 Editor standalone de archivos CSV, TSV y XLSX. Sin dependencias npm, sin build step — un servidor HTTP mínimo en Node.js sirve un frontend estático con módulos ES nativos. Extraído del editor integrado de DataB Flow.
 
 ---
