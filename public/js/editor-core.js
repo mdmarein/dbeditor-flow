@@ -85,8 +85,13 @@ function _initLang() {
   btn.title = lang === 'es' ? t('header.lang_title') : 'Cambiar a Español';
   btn.addEventListener('click', () => {
     const newLang = window.__DATAB_LANG === 'es' ? 'en' : 'es';
+    window.__DATAB_LANG = newLang;
     localStorage.setItem('datab-lang', newLang);
-    location.reload();
+    document.getElementById('editor-html-root')?.setAttribute('lang', newLang);
+    applyI18n();
+    btn.textContent = newLang === 'es' ? 'EN' : 'ES';
+    btn.title = newLang === 'es' ? t('header.lang_title') : 'Cambiar a Español';
+    if (_csv) _render();
   });
 }
 
@@ -175,7 +180,7 @@ function _initCsv(csv, filename) {
     fnEl.textContent = filename;
     document.title = `${filename} — DBEditor Flow`;
   }
-  _setStatus(filename, 'connected');
+  _setStatus('');
   _render();
 }
 

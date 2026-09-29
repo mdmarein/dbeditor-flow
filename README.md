@@ -204,7 +204,7 @@ Botón **Descargar CSV** — descarga el archivo con todos los cambios aplicados
 
 ## Idioma y tema
 
-- **Idioma**: botón `EN`/`ES` en el header. Cambiar de idioma recarga la página.
+- **Idioma**: botón `EN`/`ES` en el header. El idioma cambia al instante sin recargar la página ni perder el archivo abierto.
 - **Tema**: botón de sol/luna en el header, oscuro por defecto. No recarga la página.
 
 Ambas preferencias se guardan en `localStorage` y persisten entre sesiones.

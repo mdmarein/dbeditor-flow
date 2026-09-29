@@ -204,7 +204,7 @@ The table is paginated. You can edit a cell with a double-click, or use the tool
 
 ## Language and theme
 
-- **Language**: `EN`/`ES` button in the header. Switching language reloads the page.
+- **Language**: `EN`/`ES` button in the header. Language changes instantly without reloading the page or losing the open file.
 - **Theme**: sun/moon button in the header, dark by default. Does not reload the page.
 
 Both preferences are saved in `localStorage` and persist across sessions.

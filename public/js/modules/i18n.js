@@ -1589,7 +1589,8 @@ const DICT = {
  * @param {...any} args
  */
 export function t(key, ...args) {
-  const val = DICT[LANG]?.[key] ?? DICT.es?.[key] ?? key;
+  const lang = (typeof window !== 'undefined' ? window.__DATAB_LANG : null) || 'es';
+  const val = DICT[lang]?.[key] ?? DICT.es?.[key] ?? key;
   return typeof val === 'function' ? val(...args) : val;
 }
 
